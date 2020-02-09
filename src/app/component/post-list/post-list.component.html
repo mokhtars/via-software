@@ -1,0 +1,38 @@
+<div class="center">
+  <button class="btn btn-primary center" style="margin-right: 40%;" (click)="newPost()">Add post</button>
+  <div class="filter-user-id">
+    <input [(ngModel)]="searchText" placeholder="search text goes here" style="margin-right: 40%;" (keyup)="postById(searchText)"> 
+    <div *ngIf="!flag && searchText.length>0">
+      <div class="row" style="text-align: center;">
+        <div class="col s12 m7">
+          <div class="card" *ngFor="let post of postsId | paginate:{itemsPerPage:5, currentPage: p}">
+              <span class="card-title" style="padding: 15px;">{{ post.title.charAt(0).toUpperCase() + post.title.substring(1).toLowerCase()}}</span>
+            <div class="card-content">
+              <p> User ID : {{post.userId}}</p>
+              <p>>{{post.body}}</p>
+            </div>
+          </div>
+          <div *ngIf="postsId.length==0">
+            <p class="alert alert-primary">No data found</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>  
+<div class="row" style="text-align: center;" *ngIf="flag || searchText.length==0">
+    <div class="col s12 m7">
+      <div class="card" *ngFor="let post of posts | paginate:{itemsPerPage:5, currentPage: p}">
+          <span class="card-title" style="padding: 15px;">{{ post.title.charAt(0).toUpperCase() + post.title.substring(1).toLowerCase()}}</span>
+        <div class="card-content">
+          <p> User ID : {{post.userId}}</p>
+          <p>{{post.body}}</p>
+        </div>
+        <!-- Click here to see comments -->
+        <a (click)="onSelect(post.id)">comments</a>
+      </div>
+    </div>
+  </div>
+</div>
+<pagination-controls (pageChange)="p=$event"></pagination-controls>
+

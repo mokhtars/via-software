@@ -1,0 +1,16 @@
+.center{
+    padding-top: 8px;
+    width: 50%;
+    margin: 0 auto;
+    margin-right: 15%;
+ 
+}
+
+.card-title{
+    font-size: 20px;
+    font-style: oblique;
+}
+
+.card-content{
+    font-size: 13px;
+}
